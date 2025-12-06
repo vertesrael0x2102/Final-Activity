@@ -1,0 +1,75 @@
+/* TaskManager Component Styles */
+
+/* Main Grid Container */
+.app-layout {
+    display: grid;
+    /* Defines two columns: 240px wide sidebar and a fixed 1200px main content area */
+    grid-template-columns: 240px 1600px;
+    min-height: 100vh;
+    /* Optional: subtle shadow for the whole application box */
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Sidebar Styling */
+.sidebar {
+    background-color: #000000; /* Primary blue color */
+    color: white;
+    padding: 20px 20px 20px 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Main Content Area Styling */
+.main-content {
+    background-color: #ffffff;
+    padding: 30px;
+
+}
+
+.main-content h1 {
+    color: #000000;
+    text-align: left; /* No longer centered */
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+
+
+}
+
+/* Bulk Action Control Panel */
+.bulk-actions-panel {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.bulk-actions-panel p {
+    margin: 0 0 10px 0;
+    font-weight: bold;
+}
+
+.bulk-complete-btn,
+.bulk-delete-btn,
+.bulk-clear-btn {
+    padding: 8px 12px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.bulk-complete-btn {
+    background-color: #4caf50;
+    color: white;
+}
+
+.bulk-delete-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+.bulk-clear-btn {
+    background-color: #9e9e9e;
+    color: white;
+}

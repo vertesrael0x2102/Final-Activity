@@ -1,0 +1,63 @@
+/* FilterControls Component Styles */
+
+.sidebar-filters h3 {
+    margin-top: 0;
+    color: #c5cae9;
+    font-size: 1.1em;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #4a5a9c;
+    margin-bottom: 20px;
+}
+
+.sidebar-filters .filter-controls {
+    display: flex;
+    flex-direction: column; /* Buttons stack vertically */
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.sidebar-filters .filter-controls button {
+    /* Adjust button size for sidebar */
+    width: 100%;
+    padding: 10px;
+    background-color: #000000; /* Lighter blue */
+    color: white;
+    font-weight: normal;
+    text-align: left;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.sidebar-filters .filter-controls button:hover {
+    background-color: rgba(255, 170, 0, 0.971);
+}
+
+.sidebar-filters .filter-controls button.active-filter {
+    background-color: rgba(255, 170, 0, 0.971); /* Accent color for active filter */
+    font-weight: bold;
+    box-shadow: 0 0 5px rgba(255, 170, 0, 0.971);
+}
+
+/* Sort dropdown styling for the sidebar */
+.sidebar-filters .sort-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-start;
+}
+
+.sidebar-filters .sort-controls label {
+    color: #c5cae9;
+    font-weight: 500;
+}
+
+.sidebar-filters .sort-controls select {
+    background-color: white;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px;
+    width: 100%;
+}
