@@ -1,4 +1,4 @@
-[Uploading README.md…]()
+
 # Task Manager - CRUD Application
 
 A full-stack task management application built with React frontend and Node.js backend, featuring complete CRUD operations with SQLite database persistence.
