@@ -23,6 +23,7 @@ li {
     transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
     width: 250px; /* Fixed width for card-like appearance */
     min-height: 150px; /* Minimum height for consistency */
+    position: relative;
 }
 
 li:hover {
@@ -126,12 +127,14 @@ li.completed:hover {
     border-radius: 2px;
     font-size: 0.65em;
     font-weight: 700;
-    margin-right: 3px;
     max-width: fit-content;
     display: inline-block;
     white-space: nowrap;
     text-transform: uppercase;
     text-decoration: none !important;
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }
 
 .priority-high {
