@@ -57,8 +57,8 @@ export function useTaskManager() {
 
 
 
-    // --- C: Create (Add Task) - UPDATED to accept priority ---
-    const addTask = async (priority = 'Medium') => { // Set 'Medium' as default fallback
+    // --- C: Create (Add Task) - UPDATED to accept priority and due_date ---
+    const addTask = async (priority = 'Medium', due_date = null) => { // Set 'Medium' as default fallback
         if (taskText.trim() === '') return;
 
         setLoading(true);
@@ -71,7 +71,8 @@ export function useTaskManager() {
                 },
                 body: JSON.stringify({
                     text: taskText.trim(),
-                    priority: priority
+                    priority: priority,
+                    due_date: due_date
                 }),
             });
 
@@ -125,7 +126,7 @@ export function useTaskManager() {
         }
     };
 
-    const saveEdit = async (id, newText, newPriority) => {
+    const saveEdit = async (id, newText, newPriority, newDueDate) => {
         setLoading(true);
         setError(null);
         try {
@@ -136,7 +137,8 @@ export function useTaskManager() {
                 },
                 body: JSON.stringify({
                     text: newText.trim(),
-                    priority: newPriority
+                    priority: newPriority,
+                    due_date: newDueDate || null
                 }),
             });
 
@@ -146,7 +148,7 @@ export function useTaskManager() {
 
             setTasks(prevTasks =>
                 prevTasks.map(t =>
-                    t.id === id ? { ...t, text: newText.trim(), priority: newPriority } : t
+                    t.id === id ? { ...t, text: newText.trim(), priority: newPriority, due_date: newDueDate || null } : t
                 )
             );
         } catch (err) {
@@ -288,13 +290,12 @@ export function useTaskManager() {
             if (sortMethod === 'text_desc') {
                 return b.text.localeCompare(a.text);
             }
-            if (sortMethod === 'completed_desc') {
-                // Places completed tasks at the bottom (true = 1, false = 0)
-                return a.completed - b.completed; 
-            }
-            // Default: Keep original order (or sort by ID if you track it)
-            return 0; 
         });
+
+    // Calculate filter counts
+    const allCount = tasks.length;
+    const activeCount = tasks.filter(task => !task.completed).length;
+    const completedCount = tasks.filter(task => task.completed).length;
 
     return {
         // Core data
@@ -315,6 +316,11 @@ export function useTaskManager() {
         sortMethod,
         setSortMethod,
         sortedAndFilteredTasks, // The final list to render
+
+        // Filter counts
+        allCount,
+        activeCount,
+        completedCount,
 
         // Bulk actions
         selectedTaskIds,

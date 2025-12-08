@@ -20,6 +20,10 @@ export default function TaskManager() {
         sortMethod,
         setSortMethod,
         sortedAndFilteredTasks,
+        // Filter counts
+        allCount,
+        activeCount,
+        completedCount,
         // Bulk actions
         selectedTaskIds,
         toggleSelect,
@@ -35,8 +39,11 @@ export default function TaskManager() {
                 <FilterControls
                     filter={filter}
                     setFilter={setFilter}
-                    sortMethod={sortMethod} 
-                    setSortMethod={setSortMethod} 
+                    sortMethod={sortMethod}
+                    setSortMethod={setSortMethod}
+                    allCount={allCount}
+                    activeCount={activeCount}
+                    completedCount={completedCount}
                 />
             </nav>
 

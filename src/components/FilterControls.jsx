@@ -1,21 +1,24 @@
 import React from 'react';
 import './FilterControls.css';
 
-const FilterControls = ({ filter, setFilter, sortMethod, setSortMethod }) => (
+const FilterControls = ({ filter, setFilter, sortMethod, setSortMethod, allCount, activeCount, completedCount }) => (
     <aside className="sidebar-filters">
         <h3>View Options</h3>
 
         {/* Filter Buttons */}
         <div className="filter-controls">
-            {['all', 'active', 'completed'].map(f => (
-                <button
-                    key={f}
-                    className={filter === f ? 'active-filter' : ''}
-                    onClick={() => setFilter(f)}
-                >
-                    {f.charAt(0).toUpperCase() + f.slice(1)}
-                </button>
-            ))}
+            {['all', 'active', 'completed'].map(f => {
+                const count = f === 'all' ? allCount : f === 'active' ? activeCount : completedCount;
+                return (
+                    <button
+                        key={f}
+                        className={filter === f ? 'active-filter' : ''}
+                        onClick={() => setFilter(f)}
+                    >
+                        {f.charAt(0).toUpperCase() + f.slice(1)} ({count})
+                    </button>
+                );
+            })}
         </div>
 
         {/* Sorting Dropdown */}
