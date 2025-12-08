@@ -44,7 +44,7 @@ A full-stack task management application built with React frontend and Node.js b
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/my-crud-app.git
+   git clone https://github.com/vertesrael0x2102/my-crud-app.git
    cd my-crud-app
    ```
 
