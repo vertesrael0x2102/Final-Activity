@@ -8,6 +8,8 @@
     min-height: 100vh;
     /* Optional: subtle shadow for the whole application box */
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.08);
+    position: relative;
+    z-index: 1;
 }
 
 /* Sidebar Styling */
