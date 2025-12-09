@@ -182,14 +182,6 @@
     margin: 2rem 0 1rem 0;
 }
 
-/* Clean Divider Lines */
-hr {
-    border: none;
-    height: 1px;
-    background-color: var(--border);
-    margin: 2rem 0;
-}
-
 /* Bulk Action Control Panel - Modern Design */
 .bulk-actions-panel {
     margin: 2rem 0;

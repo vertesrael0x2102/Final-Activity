@@ -24,7 +24,7 @@ export default function TaskForm({ taskText, setTaskText, addTask }) {
                 type="text"
                 value={taskText}
                 onChange={(e) => setTaskText(e.target.value)}
-                placeholder="New"
+                placeholder="Add New Task..."
             />
             
             {/* 3. Priority Dropdown: Updates the local 'priority' state */}

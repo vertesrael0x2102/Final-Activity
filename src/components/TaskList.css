@@ -293,24 +293,24 @@ li button {
 
 /* Edit/Save Button */
 li button:nth-child(2) {
-    background-color: var(--accent);
+    background-color: #2563EB;
     color: white;
 }
 
 li button:nth-child(2):hover {
-    background-color: var(--accent-hover);
+    background-color: #1D4ED8;
     transform: translateY(-2px);
     box-shadow: var(--shadow-hover);
 }
 
 /* Delete Button */
 li button:last-child {
-    background-color: var(--error);
+    background-color: #0D9488;
     color: white;
 }
 
 li button:last-child:hover {
-    background-color: #dc2626;
+    background-color: #0F766E;
     transform: translateY(-2px);
     box-shadow: var(--shadow-hover);
 }

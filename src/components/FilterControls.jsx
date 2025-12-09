@@ -7,7 +7,7 @@ const FilterControls = ({ filter, setFilter, sortMethod, setSortMethod, allCount
 
         {/* Filter Buttons */}
         <div className="filter-controls">
-            {['all', 'active', 'completed'].map(f => {
+            {['active', 'completed', 'all'].map(f => {
                 const count = f === 'all' ? allCount : f === 'active' ? activeCount : completedCount;
                 return (
                     <button

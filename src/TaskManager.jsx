@@ -73,7 +73,7 @@ export default function TaskManager() {
 
                 <button onClick={openModal} className="new-task-btn">New Task</button>
 
-                <hr />
+                
 
                 <h2>Tasks ({sortedAndFilteredTasks.length} shown)</h2>
 
