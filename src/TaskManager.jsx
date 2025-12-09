@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useTaskManager } from './hooks/useTaskManager';
-import TaskForm from './components/TaskForm';
 import TaskList from './components/TaskList';
 import FilterControls from './components/FilterControls';
+import TaskModal from './components/TaskModal';
 import './TaskManager.css';
 
 export default function TaskManager() {
     const [theme, setTheme] = useState('light');
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
         document.documentElement.setAttribute('data-theme', theme);
@@ -15,6 +16,9 @@ export default function TaskManager() {
     const toggleTheme = () => {
         setTheme(theme === 'light' ? 'dark' : 'light');
     };
+
+    const openModal = () => setIsModalOpen(true);
+    const closeModal = () => setIsModalOpen(false);
     const {
         taskText,
         setTaskText,
@@ -67,11 +71,7 @@ export default function TaskManager() {
                 {/* 2. MAIN CONTENT COLUMN */}
                 <main className="main-content">
 
-                <TaskForm
-                    taskText={taskText}
-                    setTaskText={setTaskText}
-                    addTask={addTask}
-                />
+                <button onClick={openModal} className="new-task-btn">New Task</button>
 
                 <hr />
 
@@ -123,6 +123,15 @@ export default function TaskManager() {
                     </div>
                 </div>
             )}
+
+            {/* Task Modal */}
+            <TaskModal
+                isOpen={isModalOpen}
+                onClose={closeModal}
+                taskText={taskText}
+                setTaskText={setTaskText}
+                addTask={addTask}
+            />
         </div>
     );
 }

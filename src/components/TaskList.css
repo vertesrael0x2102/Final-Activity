@@ -142,6 +142,37 @@ li.completed:hover {
     justify-content: flex-end;
 }
 
+/* Difficulty Stars */
+.difficulty-stars {
+    display: flex;
+    gap: 0.25rem;
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    padding: 0.5rem;
+}
+
+.star {
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--transition);
+    border-radius: 4px;
+    padding: 0.125rem;
+}
+
+.star:hover {
+    transform: scale(1.1);
+}
+
+.difficulty-stars.editable .star {
+    cursor: pointer;
+}
+
+.difficulty-stars:not(.editable) .star {
+    cursor: default;
+}
+
 .task-text {
     font-size: 1.125rem;
     font-weight: 600;

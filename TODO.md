@@ -1,0 +1,4 @@
+- [x] Update TaskList.jsx to replace priority badge with star-based difficulty system
+- [x] Update TaskList.css to style the stars (gold filled, light gray empty, hover animations)
+- [x] Remove old priority badge CSS styles
+- [x] Test the star selection in edit mode and display in view mode

@@ -14,10 +14,22 @@ export default function TaskList({
     const [editingText, setEditingText] = useState('');
     const [editingPriority, setEditingPriority] = useState('');
 
-    const getPriorityClass = (priority) => {
-        if (priority === 'High') return 'priority-high';
-        if (priority === 'Medium') return 'priority-medium';
-        return 'priority-low';
+    const getStars = (priority) => {
+        if (priority === 'High') return 3;
+        if (priority === 'Medium') return 2;
+        return 1;
+    };
+
+    const getStarColor = (priority) => {
+        if (priority === 'High') return '#ef4444'; // red
+        if (priority === 'Medium') return '#f59e0b'; // orange
+        return '#3b82f6'; // blue
+    };
+
+    const getPriorityFromStars = (stars) => {
+        if (stars === 3) return 'High';
+        if (stars === 2) return 'Medium';
+        return 'Low';
     };
 
     const startEdit = (task) => {
@@ -94,9 +106,17 @@ export default function TaskList({
                             // Display Mode
                             <div className="task-content">
                                 <div className="task-header">
-                                    <span className={`priority-badge ${getPriorityClass(task.priority)}`}>
-                                        {task.priority}
-                                    </span>
+                                    <div className="difficulty-stars">
+                                        {Array.from({ length: getStars(task.priority) }, (_, i) => (
+                                            <span
+                                                key={i}
+                                                className="star"
+                                                style={{ color: getStarColor(task.priority) }}
+                                            >
+                                                ★
+                                            </span>
+                                        ))}
+                                    </div>
                                 </div>
 
                                 <div className="task-text">
