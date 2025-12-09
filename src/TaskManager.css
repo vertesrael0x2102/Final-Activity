@@ -1,77 +1,438 @@
-/* TaskManager Component Styles */
+/* TaskManager Component Styles - Modern UI Upgrades */
 
-/* Main Grid Container */
-.app-layout {
-    display: grid;
-    /* Defines two columns: 240px wide sidebar and a fixed 1200px main content area */
-    grid-template-columns: 240px 1600px;
-    min-height: 100vh;
-    /* Optional: subtle shadow for the whole application box */
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.08);
-    position: relative;
-    z-index: 1;
+/* CSS Variables for Light and Dark Themes */
+:root {
+  --bg-primary: #f8fafc; /* Soft gray background */
+  --bg-secondary: #ffffff; /* White cards */
+  --bg-sidebar: #f5f6fa; /* Soft sidebar background */
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --accent: #6366f1; /* Indigo accent */
+  --accent-hover: #5850ec;
+  --success: #10b981;
+  --error: #ef4444;
+  --warning: #f59e0b;
+  --border: #e2e8f0;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --border-radius: 12px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Sidebar Styling */
+/* Dark Theme */
+[data-theme="dark"] {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-sidebar: #334155;
+  --bg-header: #1e293b;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --accent: #818cf8;
+  --accent-hover: #6366f1;
+  --border: #475569;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.4);
+  --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
+}
+
+/* App Container */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-primary);
+  transition: var(--transition);
+}
+
+/* Header Styles */
+.app-header {
+  background-color: var(--bg-header);
+  padding: 1rem 2rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: var(--transition);
+}
+
+.app-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  letter-spacing: -0.025em;
+}
+
+/* Main Grid Container */
+.dashboard {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: 100vh;
+    background-color: var(--bg-primary);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    transition: var(--transition);
+}
+
+/* Sidebar Styling - Modern Vertical Menu */
 .sidebar {
-    background-color: #000000; /* Primary blue color */
+    background-color: var(--bg-sidebar);
+    padding: 2rem 1.5rem;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.sidebar h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--accent);
+}
+
+/* Sidebar Menu Items */
+.sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.sidebar nav a,
+.sidebar nav button {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background-color: transparent;
+    border: none;
+    border-radius: var(--border-radius);
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+}
+
+.sidebar nav a:hover,
+.sidebar nav button:hover {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    transform: translateX(4px);
+    box-shadow: var(--shadow);
+}
+
+.sidebar nav a.selected,
+.sidebar nav button.selected {
+    background-color: var(--accent);
     color: white;
-    padding: 20px 20px 20px 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+}
+
+.sidebar nav a.selected::before,
+.sidebar nav button.selected::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 60%;
+    background-color: white;
+    border-radius: 2px;
+}
+
+/* Icons for menu items (using CSS pseudo-elements for simplicity) */
+.sidebar nav a::after,
+.sidebar nav button::after {
+    content: '●';
+    font-size: 0.5rem;
+    opacity: 0.6;
 }
 
 /* Main Content Area Styling */
 .main-content {
-    background-color: #ffffff;
-    padding: 30px;
-
+    background-color: var(--bg-primary);
+    padding: 2.5rem 3rem;
+    overflow-y: auto;
 }
 
 .main-content h1 {
-    color: #000000;
-    text-align: left; /* No longer centered */
-    padding-bottom: 10px;
-    border-bottom: 1px solid #eee;
-  
-
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--border);
+    letter-spacing: -0.025em;
 }
 
-/* Bulk Action Control Panel */
+.main-content h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 2rem 0 1rem 0;
+}
+
+/* Clean Divider Lines */
+hr {
+    border: none;
+    height: 1px;
+    background-color: var(--border);
+    margin: 2rem 0;
+}
+
+/* Bulk Action Control Panel - Modern Design */
 .bulk-actions-panel {
-    margin: 20px 0;
-    padding: 15px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.bulk-actions-panel:hover {
+    box-shadow: var(--shadow-hover);
 }
 
 .bulk-actions-panel p {
-    margin: 0 0 10px 0;
-    font-weight: bold;
+    margin: 0 0 1rem 0;
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 1rem;
 }
 
 .bulk-complete-btn,
 .bulk-delete-btn,
 .bulk-clear-btn {
-    padding: 8px 12px;
-    margin-right: 10px;
+    padding: 0.75rem 1.5rem;
+    margin-right: 1rem;
     border: none;
-    border-radius: 4px;
+    border-radius: 10px;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
 }
 
 .bulk-complete-btn {
-    background-color: #4caf50;
+    background-color: var(--success);
     color: white;
+}
+
+.bulk-complete-btn:hover {
+    background-color: #059669;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
 }
 
 .bulk-delete-btn {
-    background-color: #f44336;
+    background-color: var(--error);
     color: white;
 }
 
+.bulk-delete-btn:hover {
+    background-color: #dc2626;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
 .bulk-clear-btn {
-    background-color: #9e9e9e;
+    background-color: var(--warning);
     color: white;
+}
+
+.bulk-clear-btn:hover {
+    background-color: #d97706;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-hover);
+}
+
+/* Text Selection Styling */
+::selection {
+    background-color: var(--accent);
+    color: white;
+}
+
+::-moz-selection {
+    background-color: var(--accent);
+    color: white;
+}
+
+/* Floating Actions Bar - Modern Design */
+.floating-actions-bar {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+.actions-content {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem 1.5rem;
+    background-color: var(--bg-secondary);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    transition: var(--transition);
+}
+
+.selection-text {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+}
+
+.actions-buttons {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.action-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+    text-transform: none;
+    letter-spacing: 0.025em;
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+.complete-btn {
+    background-color: var(--accent);
+    color: white;
+}
+
+.complete-btn:hover {
+    background-color: var(--accent-hover);
+}
+
+.delete-btn {
+    background-color: var(--error);
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #dc2626;
+}
+
+.clear-btn {
+    background-color: var(--bg-primary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+}
+
+.clear-btn:hover {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+/* Responsive Design for Floating Bar */
+@media (max-width: 768px) {
+    .floating-actions-bar {
+        bottom: 1rem;
+        left: 1rem;
+        right: 1rem;
+        transform: none;
+    }
+
+    .actions-content {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .selection-text {
+        text-align: center;
+    }
+
+    .actions-buttons {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -280px;
+        width: 280px;
+        height: 100vh;
+        transition: left 0.3s ease;
+        z-index: 999;
+    }
+
+    .sidebar.open {
+        left: 0;
+    }
+
+    .main-content {
+        padding: 1.5rem;
+    }
+
+    .main-content h1 {
+        font-size: 2rem;
+    }
 }

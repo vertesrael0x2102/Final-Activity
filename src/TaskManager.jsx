@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTaskManager } from './hooks/useTaskManager';
 import TaskForm from './components/TaskForm';
 import TaskList from './components/TaskList';
 import FilterControls from './components/FilterControls';
 import './TaskManager.css';
 
-
 export default function TaskManager() {
+    const [theme, setTheme] = useState('light');
+
+    useEffect(() => {
+        document.documentElement.setAttribute('data-theme', theme);
+    }, [theme]);
+
+    const toggleTheme = () => {
+        setTheme(theme === 'light' ? 'dark' : 'light');
+    };
     const {
         taskText,
         setTaskText,
@@ -32,55 +40,43 @@ export default function TaskManager() {
     } = useTaskManager();
 
     return (
-        <div className="app-layout"> 
-            
-            {/* 1. SIDEBAR COLUMN */}
-            <nav className="sidebar">
-                <FilterControls
-                    filter={filter}
-                    setFilter={setFilter}
-                    sortMethod={sortMethod}
-                    setSortMethod={setSortMethod}
-                    allCount={allCount}
-                    activeCount={activeCount}
-                    completedCount={completedCount}
-                />
-            </nav>
+        <div className="app-container">
+            {/* Header */}
+            <header className="app-header">
+                <h1>TASK MANAGER</h1>
+                {/* Theme Toggle Button */}
+                <button className="theme-toggle" onClick={toggleTheme} title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}>
+                    {theme === 'light' ? '🌙' : '☀️'}
+                </button>
+            </header>
 
-            {/* 2. MAIN CONTENT COLUMN */}
-            <main className="main-content">
-                <h1>Task Manager</h1>
+            <div className="dashboard">
+                {/* 1. SIDEBAR COLUMN */}
+                <nav className="sidebar">
+                    <FilterControls
+                        filter={filter}
+                        setFilter={setFilter}
+                        sortMethod={sortMethod}
+                        setSortMethod={setSortMethod}
+                        allCount={allCount}
+                        activeCount={activeCount}
+                        completedCount={completedCount}
+                    />
+                </nav>
 
-                <TaskForm 
-                    taskText={taskText} 
-                    setTaskText={setTaskText} 
-                    addTask={addTask} 
+                {/* 2. MAIN CONTENT COLUMN */}
+                <main className="main-content">
+
+                <TaskForm
+                    taskText={taskText}
+                    setTaskText={setTaskText}
+                    addTask={addTask}
                 />
 
                 <hr />
 
-                {/* Bulk Action Control Panel */}
-                {selectedTaskIds.length > 0 && (
-                    <div className="bulk-actions-panel">
-                        <p>{selectedTaskIds.length} tasks selected:</p>
-                        <button onClick={() => handleBulkAction('complete')} className="bulk-complete-btn">
-                            Mark Complete
-                        </button>
-                        <button onClick={() => {
-                            if (window.confirm(`Are you sure you want to delete ${selectedTaskIds.length} selected tasks?`)) {
-                                handleBulkAction('delete');
-                            }
-                        }} className="bulk-delete-btn">
-                            Delete Selected
-                        </button>
-                        <button onClick={clearSelections} className="bulk-clear-btn">
-                            Clear Selection
-                        </button>
-                    </div>
-                )}
-
                 <h2>Tasks ({sortedAndFilteredTasks.length} shown)</h2>
-                
+
                 <TaskList
                     sortedAndFilteredTasks={sortedAndFilteredTasks}
                     toggleComplete={toggleComplete}
@@ -91,6 +87,42 @@ export default function TaskManager() {
                     toggleSelect={toggleSelect}
                 />
             </main>
+            </div>
+
+            {/* Floating Bulk Actions Bar */}
+            {selectedTaskIds.length > 0 && (
+                <div className="floating-actions-bar">
+                    <div className="actions-content">
+                        <span className="selection-text">
+                            {selectedTaskIds.length === 1 ? '1 task selected' : `${selectedTaskIds.length} tasks selected`}
+                        </span>
+                        <div className="actions-buttons">
+                            <button
+                                onClick={() => handleBulkAction('complete')}
+                                className="action-btn complete-btn"
+                            >
+                                Mark Complete
+                            </button>
+                            <button
+                                onClick={() => {
+                                    if (window.confirm(`Are you sure you want to delete ${selectedTaskIds.length} selected tasks?`)) {
+                                        handleBulkAction('delete');
+                                    }
+                                }}
+                                className="action-btn delete-btn"
+                            >
+                                Delete Selected
+                            </button>
+                            <button
+                                onClick={clearSelections}
+                                className="action-btn clear-btn"
+                            >
+                                Clear Selection
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
